@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Smart Expense Tracker - Authentication</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003575",
+                        "primary-container": "#004ba0",
+                        "on-surface": "#191c1e",
+                        "on-surface-variant": "#424752",
+                        "surface-container-highest": "#e0e3e6",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body text-on-surface h-screen overflow-hidden selection:bg-primary/20 selection:text-primary">
+    <!-- Split Screen Design -->
+    <div class="flex h-full w-full">
+        <!-- Let Side: Form -->
+        <div class="w-full lg:w-1/2 flex flex-col justify-between p-8 lg:p-12 xl:p-24 relative z-10 bg-surface-container-lowest shadow-2xl overflow-y-auto">
+            <!-- Brand -->
+            <div class="mb-auto pb-8">
+                <a href="#" class="flex items-center gap-3 group w-max">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                        <span class="material-symbols-outlined text-xl">analytics</span>
+                    </div>
+                    <span class="font-headline font-bold text-xl text-primary tracking-tight">Smart Expense Tracker</span>
+                </a>
+            </div>
+
+            <!-- Form Container -->
+            <div class="w-full max-w-md mx-auto space-y-8 my-auto relative">
+                
+                <div id="errorBox" class="hidden p-4 rounded-xl bg-error/10 text-error font-bold text-sm border border-error/20 flex items-center gap-2">
+                    <span class="material-symbols-outlined pb-0.5">error</span>
+                    <span id="errorMsg">Authentication failed</span>
+                </div>
+
+                <!-- Login View -->
+                <div id="loginView" class="space-y-8 transition-opacity duration-300">
+                    <div>
+                        <h1 class="font-headline font-extrabold text-4xl mb-2 text-on-surface tracking-tight">Welcome back</h1>
+                        <p class="text-on-surface-variant opacity-80 text-sm">Enter your credentials to access your sanctuary.</p>
+                    </div>
+
+                    <form id="loginForm" class="space-y-6">
+                        <div class="space-y-4">
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest pl-1">Email Address</label>
+                                <div class="relative group">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors text-xl">mail</span>
+                                    <input type="email" id="loginEmail" required class="w-full pl-12 pr-4 py-4 bg-surface-container-highest border-transparent rounded-2xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium text-sm outline-none" placeholder="hello@example.com">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <div class="flex justify-between items-center pl-1 pr-2">
+                                    <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Password</label>
+                                </div>
+                                <div class="relative group">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors text-xl">lock</span>
+                                    <input type="password" id="loginPassword" required class="w-full pl-12 pr-4 py-4 bg-surface-container-highest border-transparent rounded-2xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium text-sm outline-none" placeholder="••••••••">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="loginBtn" type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-primary to-primary-container text-white font-bold tracking-wide shadow-xl shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98] focus:ring-4 focus:ring-primary/20 transition-all flex justify-center items-center gap-2">
+                            <span>Sign In Securely</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                    </form>
+
+                    <div class="text-center text-sm font-medium text-on-surface-variant">
+                        New to the platform? <button onclick="toggleView('signup')" class="text-primary font-bold ml-1 hover:underline underline-offset-4">Create an account</button>
+                    </div>
+                </div>
+
+                <!-- Signup View (Hidden by default) -->
+                <div id="signupView" class="space-y-8 hidden transition-opacity duration-300">
+                    <div>
+                        <h1 class="font-headline font-extrabold text-4xl mb-2 text-on-surface tracking-tight">Join the Elite.</h1>
+                        <p class="text-on-surface-variant opacity-80 text-sm leading-relaxed">Establish your sanctuary today and take absolute control over your financial architecture.</p>
+                    </div>
+
+                    <form id="signupForm" class="space-y-5">
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest pl-1">Full Name</label>
+                            <div class="relative group">
+                                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors text-xl">person</span>
+                                <input type="text" id="signupName" required class="w-full pl-12 pr-4 py-3.5 bg-surface-container-highest border-transparent rounded-2xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium text-sm outline-none" placeholder="Arthur Sterling">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest pl-1">Email Address</label>
+                            <div class="relative group">
+                                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors text-xl">mail</span>
+                                <input type="email" id="signupEmail" required class="w-full pl-12 pr-4 py-3.5 bg-surface-container-highest border-transparent rounded-2xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium text-sm outline-none" placeholder="hello@example.com">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest pl-1">Create Password</label>
+                            <div class="relative group">
+                                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors text-xl">lock</span>
+                                <input type="password" id="signupPassword" required class="w-full pl-12 pr-4 py-3.5 bg-surface-container-highest border-transparent rounded-2xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium text-sm outline-none" placeholder="••••••••">
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <button id="signupBtn" type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-primary to-primary-container text-white font-bold tracking-wide shadow-xl shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98] focus:ring-4 focus:ring-primary/20 transition-all flex justify-center items-center gap-2">
+                                <span>Create Account</span>
+                                <span class="material-symbols-outlined text-sm">rocket_launch</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center text-sm font-medium text-on-surface-variant">
+                        Already have an account? <button onclick="toggleView('login')" class="text-primary font-bold ml-1 hover:underline underline-offset-4">Sign in</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right Side: Visual/Abstract -->
+        <div class="hidden lg:flex w-1/2 relative bg-surface-container-high overflow-hidden items-center justify-center p-12">
+            <!-- Background Image -->
+            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=2000" alt="Financial Success" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay">
+            
+            <!-- Abstract Gradients -->
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/30 to-slate-900/40"></div>
+            <div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] animate-float opacity-50"></div>
+            <div class="absolute -bottom-40 -left-40 w-[600px] h-[600px] bg-blue-300/20 rounded-full blur-[100px] animate-float delay-1000 opacity-50"></div>
+
+            <!-- Floating Glass Card -->
+            <div class="relative z-10 glass-panel border border-white/30 rounded-[2rem] p-10 max-w-sm shadow-[0_32px_64px_rgba(0,0,0,0.1)] animate-float" style="animation-duration: 8s;">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="w-12 h-12 rounded-2xl bg-white/40 flex flex-col items-center justify-center shadow-inner text-primary">
+                        <span class="material-symbols-outlined text-2xl">verified</span>
+                    </div>
+                    <span class="px-3 py-1 bg-white/50 rounded-full text-[10px] font-bold text-primary uppercase tracking-widest">Premium</span>
+                </div>
+                <h3 class="font-headline font-extrabold text-3xl text-slate-800 tracking-tight leading-tight mb-4">Unleash your potential.</h3>
+                <p class="text-slate-600 text-sm font-medium leading-relaxed">Join thousands who have mastered their expenditure flow and reached unprecedented savings goals using our AI-driven ledger.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logic -->
+    <script>
+        const API_BASE = (window.location.protocol === 'file:' || (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') && window.location.port !== '3000') ? 'http://localhost:3000' : '';
+
+        function toggleView(view) {
+            const login = document.getElementById('loginView');
+            const signup = document.getElementById('signupView');
+            const err = document.getElementById('errorBox');
+            err.classList.add('hidden');
+            
+            if (view === 'signup') {
+                login.classList.add('hidden');
+                signup.classList.remove('hidden');
+            } else {
+                signup.classList.add('hidden');
+                login.classList.remove('hidden');
+            }
+        }
+
+        function showError(msg) {
+            const box = document.getElementById('errorBox');
+            const msgEl = document.getElementById('errorMsg');
+            msgEl.textContent = msg;
+            box.classList.remove('hidden');
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('signupBtn');
+            btn.innerHTML = '<span>Processing...</span>';
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    // Switch to login view
+                    toggleView('login');
+                    
+                    // Style and show success message
+                    const box = document.getElementById('errorBox');
+                    box.className = 'p-4 rounded-xl bg-green-50 text-green-700 font-bold text-sm border border-green-200 flex items-center gap-2';
+                    box.innerHTML = '<span class="material-symbols-outlined pb-0.5">check_circle</span> <span id="errorMsg">Account created! Please log in.</span>';
+                    
+                    // Reset styling for the future
+                    setTimeout(() => {
+                        box.className = 'hidden p-4 rounded-xl bg-error/10 text-error font-bold text-sm border border-error/20 flex items-center gap-2';
+                        box.innerHTML = '<span class="material-symbols-outlined pb-0.5">error</span> <span id="errorMsg"></span>';
+                    }, 5000);
+                    
+                    document.getElementById('signupForm').reset();
+                    btn.innerHTML = '<span>Create Account</span><span class="material-symbols-outlined text-sm">rocket_launch</span>';
+                } else {
+                    showError(data.error || 'Server error');
+                    btn.innerHTML = '<span>Create Account</span><span class="material-symbols-outlined text-sm">rocket_launch</span>';
+                }
+            } catch (err) {
+                showError('Network error connecting to database');
+                btn.innerHTML = '<span>Create Account</span><span class="material-symbols-outlined text-sm">rocket_launch</span>';
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.innerHTML = '<span>Authenticating...</span>';
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    localStorage.setItem('smart_tracker_user', JSON.stringify(data.user));
+                    window.location.href = 'dashboard.html';
+                } else {
+                    showError(data.error || 'Invalid credentials');
+                    btn.innerHTML = '<span>Sign In Securely</span><span class="material-symbols-outlined text-sm">arrow_forward</span>';
+                }
+            } catch (err) {
+                showError('Network error connecting to database');
+                btn.innerHTML = '<span>Sign In Securely</span><span class="material-symbols-outlined text-sm">arrow_forward</span>';
+            }
+        });
+    </script>
+</body>
+</html>

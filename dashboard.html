@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Expense Tracker - Analytical Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#70d8c8",
+                        "inverse-surface": "#2d3133",
+                        "secondary": "#006b5f",
+                        "surface-dim": "#d8dadd",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fc",
+                        "surface-tint": "#235cb2",
+                        "surface-container-high": "#e6e8eb",
+                        "on-secondary-fixed-variant": "#005048",
+                        "on-tertiary-fixed": "#002204",
+                        "on-secondary-container": "#007165",
+                        "primary-fixed": "#d8e2ff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e3e6",
+                        "tertiary-fixed-dim": "#88d982",
+                        "primary": "#003575",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#191c1e",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#a3f69c",
+                        "on-tertiary-container": "#81d27c",
+                        "surface": "#f7f9fc",
+                        "primary-container": "#004ba0",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#acc7ff",
+                        "on-primary-fixed": "#001a41",
+                        "on-background": "#191c1e",
+                        "secondary-fixed": "#8df5e4",
+                        "tertiary-container": "#005b14",
+                        "surface-container": "#eceef1",
+                        "secondary-container": "#8df5e4",
+                        "tertiary": "#00410c",
+                        "on-secondary-fixed": "#00201c",
+                        "outline-variant": "#c3c6d4",
+                        "surface-container-low": "#f2f4f7",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eff1f4",
+                        "primary-fixed-dim": "#acc7ff",
+                        "on-surface-variant": "#424752",
+                        "on-primary-fixed-variant": "#004492",
+                        "outline": "#737783",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-tertiary-fixed-variant": "#005312",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#a1bfff",
+                        "background": "#f7f9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(247, 249, 252, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .luxury-shadow {
+            box-shadow: 0px 12px 32px rgba(25, 28, 30, 0.06);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="flex flex-col h-screen sticky top-0 left-0 h-full w-64 bg-slate-50 dark:bg-slate-900 shrink-0">
+<div class="px-6 py-8">
+<h1 class="text-xl font-bold text-blue-900 dark:text-blue-100 tracking-tight font-headline">Smart Expense Tracker</h1>
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">Analytical Sanctuary</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-900 dark:text-blue-400 font-bold border-r-2 border-blue-900 dark:border-blue-400 bg-slate-100 dark:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-body text-sm">History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-body text-sm">Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="auto_graph">auto_graph</span>
+<span class="font-body text-sm">Planning</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full py-4 rounded-3xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-lg luxury-shadow flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>Log Expense</span>
+</button>
+</div>
+<div class="mt-auto px-6 py-8 flex items-center gap-3 bg-slate-100/50 dark:bg-slate-800/30">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant/20" data-alt="portrait of a professional man in a crisp white shirt with soft studio lighting and clean minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHj84xTFk-ODdtq-atH5xKMeE9dcmqk5n5yzWgH-GdUWv7OVXgNe4NeuJJqknrhwJVs6cAwQ07in7fgzDj1I9yNaGsk_r0pPCfFodTG2nRvzZGPVaZzllmBO5V_IBATJG89Epubc2ASdvpRFhNeEYtrRAHxPL_L8vnl6Uy8KHAF9VOqPhUzVH054ibtsIFRmojmtC6WsgpLuTo7Bls32n0fM20lAsfYgt3os4o7sntgQvoIisJORZ2rbUnROZNvB_4UVA52g6WTDh3"/>
+<div>
+<p class="text-sm font-bold">Arthur Sterling</p>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Premium Member</p>
+</div>
+</div>
+</aside>
+<main class="flex-1 min-w-0 overflow-y-auto no-scrollbar">
+<!-- TopNavBar Component -->
+<header class="flex justify-between items-center w-full px-8 py-4 z-40 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl sticky top-0">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="analytics">analytics</span>
+<h2 class="text-lg font-extrabold text-blue-900 dark:text-blue-100 font-headline">Overview</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-highest border-none rounded-full text-xs font-label focus:ring-1 focus:ring-primary/20 w-64" placeholder="Search analytics..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-blue-700 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-400 hover:text-blue-700 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button onclick="localStorage.removeItem('smart_tracker_user'); window.location.href='index.html'" class="text-slate-400 hover:text-red-600 transition-all active:scale-95" title="Logout">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-slate-200">
+<img alt="User settings" class="w-full h-full object-cover" data-alt="portrait of a professional man in a crisp white shirt with soft studio lighting and clean minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMWrdwRL6YYo52UYgdHk9H3hpySSU3GSt7UhqCc3bFDwIL4zPmbhtTjRgjeyKeQMzQVDi6JlSn5BI5VkK_5JSGfGIkGQIA9_ad3MzJdO6EOX_HJRJwp9GdCI08apa7Gu3Mz7ggw3TZ2F3GpjCsCwxpFSH-CqMFrbtEC1Itl4eGz4Z_DoJcWDhLv_ewu24Bo-G-WDGX3gVwGrqKilv7JHWaCt7VzZe13RNlRHkie12ZIQsBW-WzR_iPaGhI3CyXjgTJoomh7EHmqIah"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-8 space-y-8 max-w-7xl mx-auto">
+<div id="mlBudgetAlertBanner"></div>
+<!-- Hero Stats Row -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Smart Prediction Card -->
+<div class="lg:col-span-2 relative overflow-hidden rounded-3xl bg-white luxury-shadow p-8 flex flex-col justify-between group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start">
+<div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest">Smart Prediction</span>
+<h3 class="text-3xl font-extrabold font-headline mt-4 tracking-tight">Projected Spending</h3>
+<p class="text-on-surface-variant text-sm mt-1">Forecast for 2026</p>
+</div>
+<div class="text-right">
+<span id="projectedSpendingVal" class="text-4xl font-extrabold font-headline text-primary tracking-tighter">$0.00</span>
+<div class="flex items-center justify-end gap-1 text-secondary mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_down">trending_down</span>
+<span class="text-xs font-bold" id="dashboardProfitDelta">-4.2% from avg.</span>
+</div>
+</div>
+</div>
+<!-- Prediction Chart Mockup -->
+<div class="mt-10 h-32 flex items-end gap-3" id="dashboardProfitChart">
+<div class="flex-1 bg-surface-container rounded-t-lg h-[60%] transition-all group-hover:h-[65%]"></div>
+<div class="flex-1 bg-surface-container rounded-t-lg h-[45%] transition-all group-hover:h-[50%]"></div>
+<div class="flex-1 bg-surface-container rounded-t-lg h-[80%] transition-all group-hover:h-[85%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[55%] transition-all group-hover:h-[60%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[70%] transition-all group-hover:h-[75%]"></div>
+<div class="flex-1 bg-primary-container rounded-t-lg h-[90%] transition-all group-hover:h-[95%]"></div>
+<div class="flex-1 bg-primary rounded-t-lg h-[75%] transition-all group-hover:h-[80%]"></div>
+</div>
+</div>
+<div class="mt-6 flex items-center gap-4 text-xs font-medium text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-surface-container"></span> Historical</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> Predicted</span>
+<p class="ml-auto italic">Based on 12 months of recurring activity.</p>
+</div>
+</div>
+<!-- Balance Overview -->
+<div class="rounded-3xl bg-primary text-on-primary p-8 flex flex-col justify-between luxury-shadow relative overflow-hidden">
+<div class="absolute -bottom-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+<div>
+<div class="flex justify-between items-center mb-8">
+<span class="text-xs font-bold uppercase tracking-widest opacity-80">Total Liquidity</span>
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div class="space-y-1">
+<p class="text-sm opacity-70">Available Cash</p>
+<h4 id="dashTotalBalance" class="text-4xl font-extrabold font-headline tracking-tighter">$84,312.50</h4>
+</div>
+</div>
+<div class="space-y-4 pt-8 border-t border-white/10">
+<div class="flex justify-between items-center">
+<span class="text-xs">Safe to Spend</span>
+<span class="px-2 py-1 rounded bg-tertiary text-on-tertiary text-[10px] font-bold">$12,400.00</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-secondary-fixed w-3/4 rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Secondary Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+<!-- Credit & Loans Facilities -->
+<div class="lg:col-span-2 rounded-3xl bg-white p-8 luxury-shadow flex flex-col max-h-[500px]">
+    <div class="flex justify-between items-center mb-6">
+        <h3 class="text-lg font-bold font-headline">Credit & Loan Facilities</h3>
+        <button class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center shadow-md hover:bg-secondary-fixed transition-colors" onclick="window.addFacility()">
+            <span class="material-symbols-outlined text-sm">add</span>
+        </button>
+    </div>
+    
+    <div class="overflow-y-auto space-y-5 flex-1 pr-2" id="dashboardFacilitiesContainer">
+        <!-- Facilities populated via JS -->
+    </div>
+    
+    <div class="mt-6 p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/10 flex justify-between items-center">
+        <div>
+            <p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Total Liability</p>
+            <p class="text-xl font-extrabold text-error font-headline mt-1" id="dashTotalLiability">$0.00</p>
+        </div>
+        <div class="text-right">
+            <p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Total Credit Limit</p>
+            <p class="text-xl font-extrabold text-secondary font-headline mt-1" id="dashTotalCredit">$0.00</p>
+        </div>
+    </div>
+</div>
+<!-- Recent Activity List -->
+<div class="lg:col-span-3 rounded-3xl bg-white p-8 luxury-shadow">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-lg font-bold font-headline">Recent Activity</h3>
+<div class="flex gap-2">
+<button class="dash-act-btn px-4 py-1.5 rounded-full bg-surface-container-low text-xs font-bold">All</button>
+<button class="dash-act-btn px-4 py-1.5 rounded-full text-xs font-bold text-on-surface-variant hover:bg-surface-container-low">Expenses</button>
+<button class="dash-act-btn px-4 py-1.5 rounded-full text-xs font-bold text-on-surface-variant hover:bg-surface-container-low">Income</button>
+</div>
+</div>
+<div class="space-y-1">
+<!-- Transaction 1 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div>
+<p class="text-sm font-bold">Apple Store Fifth Ave</p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5">Technology • Aug 24</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-extrabold text-on-surface">-$1,299.00</p>
+<p class="text-[10px] text-secondary font-bold">Verified</p>
+</div>
+</div>
+<!-- Transaction 2 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<p class="text-sm font-bold">The Modern Pantry</p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5">Dining • Aug 23</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-extrabold text-on-surface">-$84.20</p>
+<p class="text-[10px] text-secondary font-bold">Verified</p>
+</div>
+</div>
+<!-- Transaction 3 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="electric_bolt">electric_bolt</span>
+</div>
+<div>
+<p class="text-sm font-bold">Clean Energy Corp</p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5">Utilities • Aug 22</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-extrabold text-on-surface">-$145.00</p>
+<p class="text-[10px] text-on-tertiary-fixed-variant font-bold">Recurring</p>
+</div>
+</div>
+<!-- Transaction 4 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="text-sm font-bold">Dividends - VTI</p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5">Investment • Aug 20</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-extrabold text-secondary">+$312.45</p>
+<p class="text-[10px] text-secondary font-bold">Auto-Invest</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-4 rounded-2xl bg-surface-container-low text-primary text-xs font-bold uppercase tracking-widest hover:bg-surface-container-high transition-colors">
+                        View Full Ledger
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<script src="js/store.js?v=2"></script>
+<script src="js/shared.js?v=2"></script>
+<script src="js/dashboard.js?v=2"></script>
+</body></html>
