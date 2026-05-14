@@ -1,8 +1,8 @@
-# Use an official Node.js runtime as a parent image
-FROM node:20-slim
+# Use a full Node.js image to ensure all build tools are available
+FROM node:20
 
 # Install Python and Pip
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv build-essential
 
 # Set the working directory in the container
 WORKDIR /app
@@ -10,8 +10,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install Node dependencies
-RUN npm install
+# Install Node dependencies and force build from source for sqlite3
+RUN npm install --build-from-source
 
 # Copy requirements.txt and install Python dependencies
 COPY requirements.txt ./
