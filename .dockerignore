@@ -1,0 +1,6 @@
+node_modules
+database.sqlite
+.git
+.github
+*.pyc
+__pycache__
