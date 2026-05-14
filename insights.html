@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Expense Tracker | Insights &amp; Trends</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#70d8c8",
+                        "inverse-surface": "#2d3133",
+                        "secondary": "#006b5f",
+                        "surface-dim": "#d8dadd",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fc",
+                        "surface-tint": "#235cb2",
+                        "surface-container-high": "#e6e8eb",
+                        "on-secondary-fixed-variant": "#005048",
+                        "on-tertiary-fixed": "#002204",
+                        "on-secondary-container": "#007165",
+                        "primary-fixed": "#d8e2ff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e3e6",
+                        "tertiary-fixed-dim": "#88d982",
+                        "primary": "#003575",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#191c1e",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#a3f69c",
+                        "on-tertiary-container": "#81d27c",
+                        "surface": "#f7f9fc",
+                        "primary-container": "#004ba0",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#acc7ff",
+                        "on-primary-fixed": "#001a41",
+                        "on-background": "#191c1e",
+                        "secondary-fixed": "#8df5e4",
+                        "tertiary-container": "#005b14",
+                        "surface-container": "#eceef1",
+                        "secondary-container": "#8df5e4",
+                        "tertiary": "#00410c",
+                        "on-secondary-fixed": "#00201c",
+                        "outline-variant": "#c3c6d4",
+                        "surface-container-low": "#f2f4f7",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eff1f4",
+                        "primary-fixed-dim": "#acc7ff",
+                        "on-surface-variant": "#424752",
+                        "on-primary-fixed-variant": "#004492",
+                        "outline": "#737783",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-tertiary-fixed-variant": "#005312",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#a1bfff",
+                        "background": "#f7f9fc"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .luxury-curve {
+            border-radius: 1.5rem;
+        }
+
+        .glass-panel {
+            background: rgba(247, 249, 252, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .text-editorial {
+            letter-spacing: -0.02em;
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body text-on-surface">
+    <div class="flex min-h-screen">
+        <!-- SideNavBar Shared Component -->
+        <aside
+            class="flex flex-col h-screen sticky top-0 left-0 h-full w-64 border-r-0 bg-slate-50 dark:bg-slate-900 hidden md:flex">
+            <div class="px-8 py-10">
+                <div class="text-xl font-bold text-blue-900 dark:text-blue-100 tracking-tight">Smart Expense Tracker
+                </div>
+                <div class="text-xs text-slate-500 font-medium mt-1">Analytical Sanctuary</div>
+            </div>
+            <nav class="flex-1 px-4 space-y-2">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span>History</span>
+                </a>
+                <!-- Active Tab: Insights -->
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-blue-900 dark:text-blue-400 font-bold border-r-2 border-blue-900 dark:border-blue-400 bg-slate-100 dark:bg-slate-800/50"
+                    href="#">
+                    <span class="material-symbols-outlined">query_stats</span>
+                    <span>Insights</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">auto_graph</span>
+                    <span>Planning</span>
+                </a>
+            </nav>
+            <div class="p-6">
+                <button
+                    class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-4 rounded-2xl font-semibold shadow-[0px_12px_32px_rgba(25,28,30,0.06)] active:scale-95 duration-200">
+                    Log Expense
+                </button>
+            </div>
+        </aside>
+        <main class="flex-1 min-w-0 overflow-y-auto">
+            <!-- TopNavBar Shared Component -->
+            <header
+                class="flex justify-between items-center w-full px-8 py-4 z-40 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl shadow-[0px_12px_32px_rgba(25,28,30,0.06)] sticky top-0">
+                <div class="flex items-center gap-8">
+                    <span class="text-lg font-extrabold text-blue-900 dark:text-blue-100 md:hidden">Smart Expense
+                        Tracker</span>
+                    <div class="hidden md:flex gap-6">
+                        <span
+                            class="text-xs font-semibold uppercase tracking-wider text-blue-800 dark:text-blue-200 border-b-2 border-blue-800 cursor-pointer">Insights</span>
+                        <span
+                            class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 hover:text-blue-700 dark:hover:text-blue-300 transition-all cursor-pointer"
+                            onclick="window.location.href='history.html'">Flow Chart</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="relative hidden sm:block">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+                        <input
+                            class="bg-surface-container-highest border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-primary/20 bg-surface-container-low transition-all"
+                            placeholder="Search insights..." type="text" />
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">settings</span>
+                        <span onclick="localStorage.removeItem('smart_tracker_user'); window.location.href='index.html'"
+                            class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-red-600 transition-colors"
+                            title="Logout">logout</span>
+                        <img alt="User settings" class="w-8 h-8 rounded-full border border-outline-variant/30"
+                            data-alt="Close-up portrait of a professional man with a neutral expression against a soft studio background"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCat4Y0hfN5hzAO_Jy79L2t7kowUxMfDyz4ucGQAvwY8qyLTRUjA6tqXUJMEixU-txzIF_HL7kG-vigtmfDgXr-ohfU0qUxER7YUf_QFwMwrI5iDpWheNsGpLj-s5_fCZZRqxr4d54Afaq0X4tXTrgr3SB4r9aYcfBBnFB21HavwqcWhVaalgU2vTirveUlX9DcaA-uUf1RZ4f9ZRapzrJWtLTeI262LUUeVuV3Z3TR-M8uY_JcOmqyq4Ms9rbM_XVQ768Y2lJPnNw1" />
+                    </div>
+                </div>
+            </header>
+            <div class="max-w-7xl mx-auto px-8 py-10 space-y-12">
+                
+                <!-- Hero Section: Editorial Header -->
+                <section class="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b border-surface-container">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-8 bg-primary rounded-full"></div>
+                            <p class="text-primary font-black tracking-[0.2em] text-[10px] uppercase">Financial Analytics Engine</p>
+                        </div>
+                        <h1 class="font-headline font-black text-6xl md:text-7xl text-editorial text-on-surface tracking-tighter leading-none">
+                            Insights <span class="text-primary/20">&</span> Trends
+                        </h1>
+                    </div>
+                    
+                    <div class="bg-white rounded-3xl p-6 flex items-center gap-6 shadow-[0px_12px_48px_rgba(25,28,30,0.08)] border border-primary/5 min-w-[300px]">
+                        <div class="w-14 h-14 rounded-2xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20">
+                            <span class="material-symbols-outlined text-3xl" id="trendIconTop" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                        </div>
+                        <div>
+                            <p class="text-on-surface-variant text-[10px] font-black uppercase tracking-widest opacity-60 mb-1">Portfolio Velocity</p>
+                            <p class="font-headline text-3xl font-black text-on-surface" id="netEfficiencyVal">
+                                <span id="trendDeltaVal">+0%</span>
+                                <span class="text-xs font-bold text-secondary bg-secondary/10 px-2 py-0.5 rounded ml-2">EST</span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Bento Grid Content -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Spending Velocity (Line Chart) -->
+                    <div class="lg:col-span-8 bg-white rounded-[2rem] p-8 luxury-shadow border border-primary/5 min-h-[400px]">
+                        <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-8">
+                            <div>
+                                <h3 class="font-headline text-xl font-black text-on-surface mb-1">Spending Velocity</h3>
+                                <p class="text-on-surface-variant text-xs font-medium opacity-60">Monthly expenditure tracking over the last 6 months</p>
+                            </div>
+                            <div class="flex bg-surface-container-low rounded-xl p-1 gap-1 border border-outline-variant/10">
+                                <button class="px-4 py-1.5 rounded-lg bg-white text-[10px] font-black shadow-sm text-primary transition-all">6 MONTHS</button>
+                                <button class="px-4 py-1.5 rounded-lg text-[10px] font-black text-on-surface-variant hover:bg-white transition-all">1 YEAR</button>
+                            </div>
+                        </div>
+                        
+                        <div class="h-80 w-full relative flex items-end justify-between gap-6 px-4" id="insightsGraphContainer">
+                            <!-- JS will inject the graph here -->
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <span class="material-symbols-outlined animate-spin text-primary/10 text-5xl">sync</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Allocation (Donut Chart) -->
+                    <div class="lg:col-span-4 bg-white rounded-[2rem] p-8 luxury-shadow border border-primary/5 h-full flex flex-col">
+                        <h3 class="font-headline text-xl font-black text-on-surface mb-1 text-center">Portfolio Mix</h3>
+                        <p class="text-on-surface-variant text-[10px] font-black uppercase tracking-[0.2em] opacity-40 mb-6 text-center">AI EXTRAPOLATED ALLOCATION</p>
+                        
+                        <div class="relative flex items-center justify-center mb-8">
+                            <svg class="w-44 h-44 -rotate-90" viewBox="0 0 36 36">
+                                <path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+                                <path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="45, 100" stroke-width="4.5" stroke-linecap="round"></path>
+                                <path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="25, 100" stroke-dashoffset="-45" stroke-width="4.5" stroke-linecap="round"></path>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-2xl font-headline font-black text-on-surface" id="portfolioTotalSpendPredict">₹0.00</span>
+                                <span class="text-[9px] font-black text-primary uppercase tracking-widest opacity-60">NEXT CYCLE EST</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 overflow-y-auto max-h-48 pr-2 custom-scrollbar" id="portfolioCategoryList">
+                            <!-- Categories injected by JS -->
+                        </div>
+                    </div>
+                </div>
+                        <!-- Predictive Breakdown: Glassmorphism Card -->
+                        <div
+                            class="md:col-span-12 glass-panel luxury-curve p-10 border border-white/20 shadow-2xl relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
+                                <span class="material-symbols-outlined text-[300px] text-primary"
+                                    style="font-variation-settings: 'FILL' 1;">savings</span>
+                            </div>
+                            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                <div>
+                                    <h3 class="font-headline text-3xl font-extrabold mb-4 text-editorial">30-Day Wealth
+                                        Projection</h3>
+                                    <p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+                                        How much can I spend to increase my total savings by an aggressive <span
+                                            class="text-primary font-bold"><span id="savingsGoalPctText">5</span>% in
+                                            the next 30 days</span>?
+                                        <button id="editSavingsGoalBtn"
+                                            class="ml-2 bg-surface-container hover:bg-surface-container-highest px-3 py-1 rounded-full text-primary font-bold border border-outline-variant/30 transition-colors text-sm inline-flex items-center gap-1"><span
+                                                class="material-symbols-outlined text-[14px]">edit</span> Edit
+                                            Goal</button>
+                                    </p>
+                                    <div class="space-y-4">
+                                        <div id="predictiveForecastsContainer"
+                                            class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <!-- Forecasts go here -->
+                                            <div
+                                                class="animate-pulse bg-surface-container-high h-20 rounded-2xl w-full">
+                                            </div>
+                                            <div
+                                                class="animate-pulse bg-surface-container-high h-20 rounded-2xl w-full">
+                                            </div>
+                                        </div>
+                                        <div id="predictiveProjectionStatusContainer">
+                                            <!-- Status goes here -->
+                                            <div
+                                                class="animate-pulse bg-surface-container-high h-24 rounded-2xl w-full">
+                                            </div>
+                                        </div>
+                                        <div id="optimizationText"
+                                            class="mt-4 p-5 bg-primary text-white rounded-2xl hidden shadow-lg luxury-curve">
+                                            <!-- AI Budget Suggestion goes here -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <div class="grid grid-cols-2 gap-6 mb-6">
+                                        <div
+                                            class="p-6 bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 text-center">
+                                            <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2"
+                                                id="targetSavingsLabel">Target Savings (of Income)</p>
+                                            <p class="text-xl font-bold font-headline text-primary"
+                                                id="ppTargetSavings">Analysis...</p>
+                                        </div>
+                                        <div
+                                            class="p-6 bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 text-center">
+                                            <p
+                                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">
+                                                Max spend (of Income)</p>
+                                            <p class="text-xl font-bold font-headline text-on-surface"><span
+                                                    id="ppSpendLimit">Analysis...</span> <button id="editSpendLimitBtn"
+                                                    class="ml-1 text-primary opacity-40 hover:opacity-100 transition-opacity"><span
+                                                        class="material-symbols-outlined text-[14px] align-middle">edit</span></button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="mb-6 p-4 bg-white/40 rounded-2xl border border-white/60 text-center">
+                                        <p
+                                            class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">
+                                            Projected Savings Rate (Based on ML)</p>
+                                        <p class="text-2xl font-black font-headline" id="ppProjectedSavingsRate">--%</p>
+                                        <p class="text-[10px] text-on-surface-variant mt-1"
+                                            id="ppSavingsComparisonText">Calculating impact of 7 & 30 day velocity...
+                                        </p>
+                                    </div>
+                                    <div class="w-full h-8 bg-surface-container-highest rounded-full overflow-hidden flex relative mb-4"
+                                        id="ppProgressTrack">
+                                        <div class="h-full bg-primary relative z-10 transition-all duration-1000"
+                                            style="width: 50%" id="ppBarPrimary"></div>
+                                        <div class="absolute inset-0 border-r-2 border-dashed border-error z-20"
+                                            style="width: 70%" id="ppLimitMarker"></div>
+                                    </div>
+
+                                    <div class="mt-4 grid grid-cols-2 gap-4">
+                                        <div
+                                            class="p-4 bg-tertiary-fixed text-center rounded-xl shadow-sm border border-tertiary/10 border-solid">
+                                            <p
+                                                class="text-[10px] font-bold text-on-tertiary-fixed-variant uppercase tracking-widest mb-1">
+                                                Safe to Spend</p>
+                                            <p class="font-headline text-xl font-extrabold text-on-tertiary-fixed"
+                                                id="insightSafeToSpend">₹0.00</p>
+                                        </div>
+                                        <div
+                                            class="p-4 bg-surface-container-high text-center rounded-xl shadow-sm border border-outline-variant/10 border-solid">
+                                            <p
+                                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">
+                                                Daily Burn Rate</p>
+                                            <p class="font-headline text-xl font-extrabold text-on-surface"
+                                                id="insightBurnRate">₹0/day</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Regional Spend Heatmap / Insight Card -->
+                        <div class="md:col-span-12 flex flex-col md:flex-row gap-8">
+                            <div class="flex-1 bg-surface-container-low luxury-curve p-8 overflow-hidden relative">
+                                <h4 class="font-headline text-lg font-black mb-6 text-on-surface">Machine Learning Intelligence</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="merchantIntelligenceContainer">
+                                    <div
+                                        class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:translate-x-2 transition-transform cursor-pointer">
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center">
+                                                <span class="material-symbols-outlined text-primary">shopping_bag</span>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-sm">Whole Foods Market</p>
+                                                <p class="text-xs text-on-surface-variant">Top Merchant • 14 Visits</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="font-bold text-sm">₹842.10</p>
+                                            <p class="text-[10px] text-secondary font-bold uppercase">-4% Saving</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:translate-x-2 transition-transform cursor-pointer">
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center">
+                                                <span
+                                                    class="material-symbols-outlined text-primary">directions_car</span>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-sm">Tesla Supercharger</p>
+                                                <p class="text-xs text-on-surface-variant">Logistics • 8 Visits</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="font-bold text-sm">₹128.40</p>
+                                            <p class="text-[10px] text-error font-bold uppercase">+12% Inflated</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                  <!-- New Feature: Subscription Intelligence & Fixed Cost Audit -->
+                            <div class="w-full md:w-[450px] bg-white rounded-[2.5rem] p-10 luxury-shadow border border-primary/5 flex flex-col space-y-8 relative overflow-hidden group">
+                                <!-- Background Watermark -->
+                                <div class="absolute -bottom-10 -right-10 opacity-[0.03] pointer-events-none group-hover:opacity-[0.06] transition-opacity duration-700">
+                                    <span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">payments</span>
+                                </div>
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full blur-3xl group-hover:bg-secondary/10 transition-all"></div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-2xl bg-secondary-container text-secondary flex items-center justify-center shadow-inner">
+                                            <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">calendar_view_day</span>
+                                        </div>
+                                        <h4 class="font-headline font-black text-xl text-on-surface">Fixed Cost Audit</h4>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary text-[10px] font-black uppercase tracking-widest">AI Scanner Active</span>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <div class="p-5 bg-surface-container-low rounded-2xl border border-outline-variant/10 relative group/item hover:bg-white hover:shadow-lg transition-all duration-300">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <p class="text-xs font-black text-on-surface-variant opacity-60 uppercase tracking-widest">Potential Subscription Leak</p>
+                                            <span class="text-[10px] font-bold text-error bg-error/10 px-2 py-0.5 rounded">High Probability</span>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+                                                <span class="material-symbols-outlined text-on-surface opacity-40">subscriptions</span>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-black text-on-surface">Recurring Digital Service</p>
+                                                <p class="text-[10px] text-on-surface-variant font-medium mt-0.5">₹499.00 • Monthly cycle detected</p>
+                                            </div>
+                                            <button class="w-8 h-8 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                                                <span class="material-symbols-outlined text-sm">close</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-6 bg-secondary/5 rounded-3xl border border-secondary/10">
+                                        <div class="flex items-center gap-3 mb-4">
+                                            <span class="material-symbols-outlined text-secondary text-xl">tips_and_updates</span>
+                                            <p class="text-sm font-black text-on-surface">AI Optimization Tip</p>
+                                        </div>
+                                        <p class="text-xs text-on-surface-variant leading-relaxed font-medium">
+                                            Your fixed costs account for <span class="text-secondary font-black">28%</span> of your total spending. Consider auditing digital services you haven't used in the last 60 days to save approx. <span class="text-secondary font-black">₹1,200/year</span>.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <button class="w-full py-4 rounded-2xl bg-on-surface text-white text-xs font-black uppercase tracking-[0.2em] hover:bg-secondary transition-all active:scale-95 shadow-lg shadow-on-surface/10">
+                                    Launch Subscription Manager
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </main>
+    </div>
+    <!-- Mobile BottomNavBar (Hidden on MD and up) -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t-0 py-3 px-6 flex justify-between items-center z-50 shadow-[0px_-4px_24px_rgba(0,0,0,0.05)]">
+        <a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="text-[10px] font-bold uppercase">Home</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+            <span class="material-symbols-outlined">receipt_long</span>
+            <span class="text-[10px] font-bold uppercase">Bills</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-blue-900 font-bold" href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+            <span class="text-[10px] font-bold uppercase">Insights</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+            <span class="material-symbols-outlined">auto_graph</span>
+            <span class="text-[10px] font-bold uppercase">Plan</span>
+        </a>
+    </nav>
+    <script src="js/store.js?v=3"></script>
+    <script src="js/shared.js?v=3"></script>
+    <script src="js/insights.js?v=3"></script>
+</body>
+
+</html>

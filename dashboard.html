@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Expense Tracker - Analytical Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#70d8c8",
+                        "inverse-surface": "#2d3133",
+                        "secondary": "#006b5f",
+                        "surface-dim": "#d8dadd",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fc",
+                        "surface-tint": "#235cb2",
+                        "surface-container-high": "#e6e8eb",
+                        "on-secondary-fixed-variant": "#005048",
+                        "on-tertiary-fixed": "#002204",
+                        "on-secondary-container": "#007165",
+                        "primary-fixed": "#d8e2ff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e3e6",
+                        "tertiary-fixed-dim": "#88d982",
+                        "primary": "#003575",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#191c1e",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#a3f69c",
+                        "on-tertiary-container": "#81d27c",
+                        "surface": "#f7f9fc",
+                        "primary-container": "#004ba0",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#acc7ff",
+                        "on-primary-fixed": "#001a41",
+                        "on-background": "#191c1e",
+                        "secondary-fixed": "#8df5e4",
+                        "tertiary-container": "#005b14",
+                        "surface-container": "#eceef1",
+                        "secondary-container": "#8df5e4",
+                        "tertiary": "#00410c",
+                        "on-secondary-fixed": "#00201c",
+                        "outline-variant": "#c3c6d4",
+                        "surface-container-low": "#f2f4f7",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eff1f4",
+                        "primary-fixed-dim": "#acc7ff",
+                        "on-surface-variant": "#424752",
+                        "on-primary-fixed-variant": "#004492",
+                        "outline": "#737783",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-tertiary-fixed-variant": "#005312",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#a1bfff",
+                        "background": "#f7f9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .zenith-card {
+            background: linear-gradient(135deg, #003575 0%, #001a41 100%);
+            border-radius: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .zenith-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 40px 80px rgba(0, 53, 117, 0.2);
+        }
+
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, #ffffff 0%, #a1bfff 50%, #ffffff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #70d8c8;
+            box-shadow: 0 0 0 0 rgba(112, 216, 200, 0.7);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(112, 216, 200, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(112, 216, 200, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(112, 216, 200, 0); }
+        }
+
+        .budget-track {
+            background: rgba(255, 255, 255, 0.05);
+            height: 10px;
+            border-radius: 99px;
+            position: relative;
+        }
+
+        .budget-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, #70d8c8, #235cb2);
+            box-shadow: 0 0 20px rgba(112, 216, 200, 0.3);
+            transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            padding: 8px;
+            background: #f8fafc;
+            border-radius: 1.5rem;
+        }
+
+        .calendar-day {
+            background: #ffffff;
+            aspect-ratio: 1;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(0, 53, 117, 0.02);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+        }
+
+        .calendar-day:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: #ffffff;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            color: #003575;
+            z-index: 20;
+        }
+
+        .calendar-day.active {
+            background: #f1f5f9;
+        }
+
+        .calendar-day.today {
+            background: linear-gradient(135deg, #003575 0%, #001a41 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 53, 117, 0.3);
+            border: none;
+        }
+
+        .calendar-day.selected {
+            border: 2px solid #003575;
+            background: #f8fafc;
+        }
+
+        .day-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-header-day {
+            text-align: center;
+            font-size: 0.55rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #94a3b8;
+            padding: 0.35rem 0;
+        }
+
+        .event-modal {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Bill Reminders Dark Section Styles */
+        #dashboardRemindersContainer::-webkit-scrollbar {
+            width: 4px;
+        }
+        #dashboardRemindersContainer::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="flex flex-col h-screen sticky top-0 left-0 h-full w-64 bg-slate-50 dark:bg-slate-900 shrink-0">
+<div class="px-6 py-8">
+<h1 class="text-xl font-bold text-blue-900 dark:text-blue-100 tracking-tight font-headline">Smart Expense Tracker</h1>
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">Analytical Sanctuary</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-900 dark:text-blue-400 font-bold border-r-2 border-blue-900 dark:border-blue-400 bg-slate-100 dark:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-body text-sm">History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-body text-sm">Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="auto_graph">auto_graph</span>
+<span class="font-body text-sm">Planning</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full py-4 rounded-3xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-lg luxury-shadow flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>Log Expense</span>
+</button>
+</div>
+<div class="mt-auto px-6 py-8 flex items-center gap-3 bg-slate-100/50 dark:bg-slate-800/30">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant/20" data-alt="portrait of a professional man in a crisp white shirt with soft studio lighting and clean minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHj84xTFk-ODdtq-atH5xKMeE9dcmqk5n5yzWgH-GdUWv7OVXgNe4NeuJJqknrhwJVs6cAwQ07in7fgzDj1I9yNaGsk_r0pPCfFodTG2nRvzZGPVaZzllmBO5V_IBATJG89Epubc2ASdvpRFhNeEYtrRAHxPL_L8vnl6Uy8KHAF9VOqPhUzVH054ibtsIFRmojmtC6WsgpLuTo7Bls32n0fM20lAsfYgt3os4o7sntgQvoIisJORZ2rbUnROZNvB_4UVA52g6WTDh3"/>
+<div>
+<p class="text-sm font-bold">Arthur Sterling</p>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Premium Member</p>
+</div>
+</div>
+</aside>
+<main class="flex-1 min-w-0 overflow-y-auto no-scrollbar">
+<!-- TopNavBar Component -->
+<header class="flex justify-between items-center w-full px-8 py-4 z-40 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl sticky top-0">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="analytics">analytics</span>
+<h2 class="text-lg font-extrabold text-blue-900 dark:text-blue-100 font-headline">Overview</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-highest border-none rounded-full text-xs font-label focus:ring-1 focus:ring-primary/20 w-64" placeholder="Search analytics..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-blue-700 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-400 hover:text-blue-700 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button onclick="localStorage.removeItem('smart_tracker_user'); window.location.href='index.html'" class="text-slate-400 hover:text-red-600 transition-all active:scale-95" title="Logout">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-slate-200">
+<img alt="User settings" class="w-full h-full object-cover" data-alt="portrait of a professional man in a crisp white shirt with soft studio lighting and clean minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMWrdwRL6YYo52UYgdHk9H3hpySSU3GSt7UhqCc3bFDwIL4zPmbhtTjRgjeyKeQMzQVDi6JlSn5BI5VkK_5JSGfGIkGQIA9_ad3MzJdO6EOX_HJRJwp9GdCI08apa7Gu3Mz7ggw3TZ2F3GpjCsCwxpFSH-CqMFrbtEC1Itl4eGz4Z_DoJcWDhLv_ewu24Bo-G-WDGX3gVwGrqKilv7JHWaCt7VzZe13RNlRHkie12ZIQsBW-WzR_iPaGhI3CyXjgTJoomh7EHmqIah"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-8 space-y-8 max-w-7xl mx-auto">
+<div id="mlBudgetAlertBanner"></div>
+<!-- Hero Stats Row -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Smart Prediction Card -->
+<div class="lg:col-span-2 relative overflow-hidden rounded-3xl bg-white luxury-shadow p-8 flex flex-col justify-between group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start">
+<div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest">Smart Prediction</span>
+<h3 class="text-3xl font-extrabold font-headline mt-4 tracking-tight">AI Projection</h3>
+<p class="text-on-surface-variant text-sm mt-1">Prediction for Next Month</p>
+</div>
+<div class="text-right">
+<div class="flex items-end justify-end gap-6">
+    <div class="text-right">
+        <p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-1">Expense</p>
+        <span id="projectedExpenseVal" class="text-2xl font-extrabold font-headline text-error tracking-tighter">₹0.00</span>
+    </div>
+    <div class="text-right">
+        <p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-1">Income</p>
+        <span id="projectedIncomeVal" class="text-3xl font-extrabold font-headline text-secondary tracking-tighter">₹0.00</span>
+    </div>
+</div>
+<div class="flex items-center justify-end gap-1 text-secondary mt-2">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span class="text-xs font-bold" id="dashboardProfitDelta">+0.0% income growth</span>
+</div>
+</div>
+</div>
+<!-- Prediction Chart Mockup -->
+<div class="mt-10 h-32 flex items-end gap-3" id="dashboardProfitChart">
+<div class="flex-1 bg-surface-container rounded-t-lg h-[60%] transition-all group-hover:h-[65%]"></div>
+<div class="flex-1 bg-surface-container rounded-t-lg h-[45%] transition-all group-hover:h-[50%]"></div>
+<div class="flex-1 bg-surface-container rounded-t-lg h-[80%] transition-all group-hover:h-[85%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[55%] transition-all group-hover:h-[60%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[70%] transition-all group-hover:h-[75%]"></div>
+<div class="flex-1 bg-primary-container rounded-t-lg h-[90%] transition-all group-hover:h-[95%]"></div>
+<div class="flex-1 bg-primary rounded-t-lg h-[75%] transition-all group-hover:h-[80%]"></div>
+</div>
+</div>
+<div class="mt-6 flex items-center gap-4 text-xs font-medium text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-surface-container"></span> Historical</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> Predicted</span>
+<p class="ml-auto italic">Based on 2 months of recurring activity.</p>
+</div>
+</div>
+<!-- Balance Overview -->
+<div class="zenith-card p-10 flex flex-col justify-between group">
+    <!-- Background Decor -->
+    <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary-container/20 rounded-full blur-[100px]"></div>
+    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-secondary/10 rounded-full blur-[100px]"></div>
+
+    <div class="relative z-10 space-y-10">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="pulse-dot"></div>
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-white/50">Capital Matrix</span>
+            </div>
+            <div class="w-12 h-12 glass-overlay flex items-center justify-center text-white">
+                <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+            </div>
+        </div>
+
+        <div class="space-y-2">
+            <p class="text-[11px] font-bold uppercase tracking-widest text-white/40">Portfolio Net Worth</p>
+            <h4 id="dashLifetimeBalance" class="text-5xl font-black font-headline tracking-tighter shimmer-text">₹0.00</h4>
+        </div>
+
+        <div class="glass-overlay p-6 space-y-4">
+            <div class="flex items-center justify-between">
+                <div class="space-y-1">
+                    <p class="text-[9px] font-black uppercase tracking-widest text-white/30">Monthly Momentum</p>
+                    <h4 id="dashMonthlyRemaining" class="text-2xl font-black font-headline tracking-tight text-secondary-fixed">₹0.00</h4>
+                </div>
+                <div class="text-right">
+                    <span class="text-[10px] font-bold text-white/40 block">Forecast</span>
+                    <span class="text-xs font-black text-white">PROJECTION</span>
+                </div>
+            </div>
+            
+            <div class="space-y-3 pt-4 border-t border-white/5">
+                <div class="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
+                    <span class="text-white/40">Budget Pulse</span>
+                    <span id="dashRemainingStatus" class="text-secondary-fixed">0% DEPLETED</span>
+                </div>
+                <div class="budget-track">
+                    <div id="dashRemainingBar" class="budget-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="relative z-10 mt-8 flex items-center justify-between">
+        <p class="text-[10px] font-medium text-white/30 leading-relaxed max-w-[200px]">Real-time synchronization with global ledger assets.</p>
+        <button class="w-10 h-10 rounded-full glass-overlay flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all">
+            <span class="material-symbols-outlined text-sm">arrow_outward</span>
+        </button>
+    </div>
+</div>
+</section>
+<!-- Calendar & Day Focus Row -->
+<section class="grid grid-cols-1 gap-8">
+    <!-- Interactive Calendar -->
+    <div class="bg-white rounded-[2.5rem] luxury-shadow p-8 space-y-8 border border-slate-50">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-lg shadow-slate-900/10">
+                    <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-black font-headline tracking-tighter text-slate-900" id="calendarMonthYear">May 2026</h3>
+                    <div class="flex items-center gap-2 mt-0.5">
+                        <div class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-pulse"></div>
+                        <p class="text-[9px] font-black uppercase tracking-[0.15em] text-slate-400">Tactical Roadmap</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button id="prevMonth" class="p-2.5 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-primary transition-all">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button id="nextMonth" class="p-2.5 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-primary transition-all">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="calendar-grid-container">
+            <div class="grid grid-cols-7 mb-2">
+                <div class="calendar-header-day">Sun</div>
+                <div class="calendar-header-day">Mon</div>
+                <div class="calendar-header-day">Tue</div>
+                <div class="calendar-header-day">Wed</div>
+                <div class="calendar-header-day">Thu</div>
+                <div class="calendar-header-day">Fri</div>
+                <div class="calendar-header-day">Sat</div>
+            </div>
+            <div id="calendarGrid" class="calendar-grid">
+                <!-- Calendar days will be injected here -->
+            </div>
+        </div>
+
+        <!-- Compact Day Focus (Now Below Calendar) -->
+        <div class="pt-10 border-t border-slate-100/50">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-10">
+                <div class="flex items-center gap-6">
+                    <div>
+                        <h4 class="text-lg font-black font-headline uppercase tracking-tighter text-slate-900">Temporal Focus</h4>
+                        <div id="dayStatusBadge" class="mt-2 inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900 text-[9px] font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-slate-900/20 hidden">
+                            <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+                            <span id="dayStatusText">Neutral Day</span>
+                        </div>
+                    </div>
+                    <div class="h-10 w-px bg-slate-100 mx-2"></div>
+                    <span id="selectedDateDisplay" class="text-sm font-black text-slate-400 font-headline tracking-tight">May 14, 2026</span>
+                </div>
+                <button id="addEventBtn" class="group relative py-4 px-8 rounded-2xl bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3 shadow-xl shadow-primary/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <span class="material-symbols-outlined text-sm">add_circle</span>
+                    <span>New Strategic Entry</span>
+                </button>
+            </div>
+
+            <div id="dayFocusContent" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Events will be injected here in a horizontal grid -->
+                <div class="col-span-full py-16 flex flex-col items-center justify-center text-center opacity-20">
+                    <span class="material-symbols-outlined text-4xl mb-4">event_note</span>
+                    <p class="text-xs font-black uppercase tracking-widest">No strategic entries for this timeline</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event Modal -->
+<div id="eventModal" class="fixed inset-0 z-[100] event-modal flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-[2.5rem] w-full max-w-md p-10 luxury-shadow space-y-8 transform scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center">
+            <h3 class="text-2xl font-black font-headline tracking-tight" id="modalTitle">Log Event</h3>
+            <button id="closeModal" class="text-slate-400 hover:text-red-500 transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+
+        <form id="eventForm" class="space-y-6">
+            <input type="hidden" id="eventId">
+            <div class="space-y-2">
+                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Event Title</label>
+                <input id="eventTitle" type="text" placeholder="e.g. Diwali, Rent Payment" class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10 font-bold" required>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Amount (₹)</label>
+                    <input id="eventAmount" type="number" placeholder="0.00" class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10 font-bold">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Type</label>
+                    <select id="eventType" class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10 font-bold">
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Description</label>
+                <textarea id="eventDescription" placeholder="Notes for this day..." class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10 font-bold resize-none" rows="3"></textarea>
+            </div>
+
+            <div class="pt-4 flex gap-4">
+                <button type="submit" class="flex-1 py-4 rounded-2xl bg-primary text-white text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                    Secure Entry
+                </button>
+                <button type="button" id="deleteEventBtn" class="hidden w-14 h-14 rounded-2xl bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all active:scale-95">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</main>
+    <script src="js/store.js?v=4"></script>
+    <script src="js/shared.js?v=4"></script>
+    <script src="js/dashboard.js?v=4"></script>
+    <script src="js/calendar.js?v=4"></script>
+</body></html>
